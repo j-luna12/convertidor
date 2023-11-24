@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de decimal a binario</title>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+    <div style="text-align: center;">
+        <form>
+            <h1>Decimal a binario</h1>
+            <input type="number" id="numero" placeholder="Digite el decimal">
+            <br>
+            <button id="convertir">Convertir</button>
+            <p id="resultado"></p>
+        </form>
+    </div>
+    <script>
+        function decimal_a_binario(numero) {
+            // El número decimal debe estar entre 0 y 255
+            if (isNaN(numero) || numero < 0 || numero > 255) {
+                alert("Ingresa un número decimal válido entre 0 y 255");
+                return null;
+            }
+
+            // Convertimos el número decimal a binario con un máximo de 8 bits
+            return numero.toString(2).padStart(8, '0').split('').map(Number);
+        }
+
+        function mostrar_resultado(bits) {
+            // Convertimos el vector de bits a una cadena de texto
+            var cadena = bits ? bits.join('') : '';
+
+            // Mostramos el resultado en el elemento con id "resultado"
+            document.getElementById("resultado").innerHTML = cadena;
+        }
+
+        // Evento de clic del botón "Convertir"
+        document.getElementById("convertir").onclick = function() {
+            // Obtenemos el número decimal introducido por el usuario
+            var numero = parseInt(document.getElementById("numero").value);
+
+            // Convertimos el número decimal a binario
+            var bits = decimal_a_binario(numero);
+
+            // Mostramos el resultado
+            mostrar_resultado(bits);
+        };
+    </script>
+</body>
+</html>
+
